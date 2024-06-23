@@ -4,10 +4,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.empty;
 
-import java.util.Collections;
 import java.util.List;
 
 import edu.austral.ingsis.math.binaryfunctions.*;
+import edu.austral.ingsis.math.unaryfunctions.*;
 import edu.austral.ingsis.math.values.Number;
 import edu.austral.ingsis.math.values.Variable;
 import edu.austral.ingsis.math.visitors.VariableCollector;
@@ -44,7 +44,10 @@ public class ListVariablesTest {
   /** Case (9 / x) * y */
   @Test
   public void shouldListVariablesFunction3() {
-    final List<String> result = Collections.emptyList();
+    VariableCollector variableCollector = createVariableCollector();
+    Multiply func = new Multiply(new Divide(new Number(9d), new Variable("x")), new Variable("y"));
+    variableCollector.visit(func);
+    final List<String> result = variableCollector.getVariables().stream().toList();
 
     assertThat(result, containsInAnyOrder("x", "y"));
   }
@@ -52,7 +55,10 @@ public class ListVariablesTest {
   /** Case (27 / a) ^ b */
   @Test
   public void shouldListVariablesFunction4() {
-    final List<String> result = Collections.emptyList();
+    VariableCollector variableCollector = createVariableCollector();
+    Power func = new Power(new Divide(new Number(27d), new Variable("a")), new Variable("b"));
+    variableCollector.visit(func);
+    final List<String> result = variableCollector.getVariables().stream().toList();
 
     assertThat(result, containsInAnyOrder("a", "b"));
   }
@@ -60,7 +66,10 @@ public class ListVariablesTest {
   /** Case z ^ (1/2) */
   @Test
   public void shouldListVariablesFunction5() {
-    final List<String> result = Collections.emptyList();
+    VariableCollector variableCollector = createVariableCollector();
+    Sqrt func = new Sqrt(new Variable("z"));
+    variableCollector.visit(func);
+    final List<String> result = variableCollector.getVariables().stream().toList();
 
     assertThat(result, containsInAnyOrder("z"));
   }
@@ -68,15 +77,10 @@ public class ListVariablesTest {
   /** Case |value| - 8 */
   @Test
   public void shouldListVariablesFunction6() {
-    final List<String> result = Collections.emptyList();
-
-    assertThat(result, containsInAnyOrder("value"));
-  }
-
-  /** Case |value| - 8 */
-  @Test
-  public void shouldListVariablesFunction7() {
-    final List<String> result = Collections.emptyList();
+    VariableCollector variableCollector = createVariableCollector();
+    Subtract func = new Subtract(new Absolute(new Variable("value")), new Number(8d));
+    variableCollector.visit(func);
+    final List<String> result = variableCollector.getVariables().stream().toList();
 
     assertThat(result, containsInAnyOrder("value"));
   }
@@ -84,7 +88,10 @@ public class ListVariablesTest {
   /** Case (5 - i) * 8 */
   @Test
   public void shouldListVariablesFunction8() {
-    final List<String> result = Collections.emptyList();
+    VariableCollector variableCollector = createVariableCollector();
+    Multiply func = new Multiply(new Subtract(new Number(5d), new Variable("i")), new Number(8d));
+    variableCollector.visit(func);
+    final List<String> result = variableCollector.getVariables().stream().toList();
 
     assertThat(result, containsInAnyOrder("i"));
   }

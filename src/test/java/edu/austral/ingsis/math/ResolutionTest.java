@@ -4,7 +4,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import edu.austral.ingsis.math.binaryfunctions.*;
 import edu.austral.ingsis.math.unaryfunctions.*;
-import edu.austral.ingsis.math.unaryfunctions.Module;
+import edu.austral.ingsis.math.unaryfunctions.Absolute;
 import edu.austral.ingsis.math.values.Number;
 
 
@@ -73,7 +73,7 @@ public class ResolutionTest {
   /** Case |136| */
   @Test
   public void shouldResolveSimpleFunction6() {
-    final Double result = new Module(
+    final Double result = new Absolute(
             new Number(136d))
             .evaluate();
 
@@ -83,7 +83,7 @@ public class ResolutionTest {
   /** Case |-136| */
   @Test
   public void shouldResolveSimpleFunction7() {
-    final Double result = new Module(
+    final Double result = new Absolute(
             new Number(-136d))
             .evaluate();
 

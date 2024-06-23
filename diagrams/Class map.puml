@@ -1,0 +1,95 @@
+@startuml
+
+interface Function {
+    + accept(visitor: Visitor)
+    + evaluate()
+}
+
+class Sum {
+    + left: Function
+    + right: Function
+    + evaluate()
+}
+
+class Subtract{
+    + left: Function
+    + right: Function
+    + evaluate()
+}
+
+class Multiply {
+    + left: Function
+    + right: Function
+    + evaluate()
+}
+
+class Divide {
+    + numerator: Function
+    + denominator: Function
+    + evaluate()
+}
+
+class Power {
+    + base: Function
+    + exponent: Function
+    + evaluate()
+}
+
+class Sqrt {
+    + radicand: Function
+    + index: Function
+    + evaluate()
+}
+
+class Module {
+    + value: Function
+    + evaluate()
+}
+
+class Number {
+    + value: double
+    + evaluate()
+}
+
+class Variable {
+    + name: String
+    + evaluate()
+}
+
+interface Visitor{
+    + visit(sum: Sum)
+    + visit(subtract: Subtract)
+    + visit(multiply: Multiply)
+    + visit(divide: Divide)
+    + visit(power: Power)
+    + visit(sqrt: Sqrt)
+    + visit(module: Module)
+    + visit(number: Number)
+    + visit(variable: Variable)
+}
+
+class Printer{
+    + visit(func: Function)
+    + getResult() : String
+}
+
+class VariableCollector {
+    + visit(func: Function)
+    + getVariables() : HashMap<String, Double>
+}
+
+Sum <|.. Function
+Subtract <|.. Function
+Function ...|> Divide
+Function ...|> Multiply
+Function ...|> Power
+Function ...|> Module
+Function ...|> Sqrt
+Number <|.. Function
+Variable <|. Function
+
+Function <- Visitor
+
+Visitor .|> Printer
+Visitor ..|> VariableCollector
+@enduml

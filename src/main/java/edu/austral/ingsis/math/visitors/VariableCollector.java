@@ -1,7 +1,7 @@
 package edu.austral.ingsis.math.visitors;
 
 import edu.austral.ingsis.math.binaryfunctions.*;
-import edu.austral.ingsis.math.unaryfunctions.Module;
+import edu.austral.ingsis.math.unaryfunctions.Absolute;
 import edu.austral.ingsis.math.unaryfunctions.Sqrt;
 import edu.austral.ingsis.math.values.Number;
 import edu.austral.ingsis.math.values.Variable;
@@ -51,8 +51,8 @@ public class VariableCollector implements Visitor{
     }
 
     @Override
-    public void visit(Module module) {
-        module.getValue().accept(this);
+    public void visit(Absolute absolute) {
+        absolute.getValue().accept(this);
     }
 
     @Override

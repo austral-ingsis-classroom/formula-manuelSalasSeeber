@@ -5,10 +5,10 @@ import edu.austral.ingsis.math.visitors.Visitor;
 
 import java.util.HashMap;
 
-public class Module implements Function {
+public class Absolute implements Function {
     private final Function value;
 
-    public Module(Function value) {
+    public Absolute(Function value) {
         this.value = value;
     }
     @Override
