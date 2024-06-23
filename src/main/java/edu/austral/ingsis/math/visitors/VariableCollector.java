@@ -5,14 +5,15 @@ import edu.austral.ingsis.math.unaryfunctions.Absolute;
 import edu.austral.ingsis.math.unaryfunctions.Sqrt;
 import edu.austral.ingsis.math.values.Number;
 import edu.austral.ingsis.math.values.Variable;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class VariableCollector implements Visitor {
 
-  private final HashSet<String> variables;
+  private final List<String> variables;
 
   public VariableCollector() {
-    this.variables = new HashSet<>();
+    this.variables = new ArrayList<>();
   }
 
   @Override
@@ -63,7 +64,7 @@ public class VariableCollector implements Visitor {
     sqrt.getValue().accept(this);
   }
 
-  public HashSet<String> getVariables() {
+  public List<String> getVariables() {
     return variables;
   }
 }

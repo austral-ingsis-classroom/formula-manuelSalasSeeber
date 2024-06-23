@@ -24,7 +24,7 @@ public class ListVariablesTest {
     VariableCollector variableCollector = createVariableCollector();
     Sum sum = new Sum(new Number(1d), new Number(6d));
     variableCollector.visit(sum);
-    final List<String> result = variableCollector.getVariables().stream().toList();
+    final List<String> result = variableCollector.getVariables();
 
     assertThat(result, empty());
   }
@@ -35,7 +35,7 @@ public class ListVariablesTest {
     VariableCollector variableCollector = createVariableCollector();
     Divide divide = new Divide(new Number(12d), new Variable("div"));
     variableCollector.visit(divide);
-    final List<String> result = variableCollector.getVariables().stream().toList();
+    final List<String> result = variableCollector.getVariables();
 
     assertThat(result, containsInAnyOrder("div"));
   }
@@ -46,7 +46,7 @@ public class ListVariablesTest {
     VariableCollector variableCollector = createVariableCollector();
     Multiply func = new Multiply(new Divide(new Number(9d), new Variable("x")), new Variable("y"));
     variableCollector.visit(func);
-    final List<String> result = variableCollector.getVariables().stream().toList();
+    final List<String> result = variableCollector.getVariables();
 
     assertThat(result, containsInAnyOrder("x", "y"));
   }
@@ -57,7 +57,7 @@ public class ListVariablesTest {
     VariableCollector variableCollector = createVariableCollector();
     Power func = new Power(new Divide(new Number(27d), new Variable("a")), new Variable("b"));
     variableCollector.visit(func);
-    final List<String> result = variableCollector.getVariables().stream().toList();
+    final List<String> result = variableCollector.getVariables();
 
     assertThat(result, containsInAnyOrder("a", "b"));
   }
@@ -68,7 +68,7 @@ public class ListVariablesTest {
     VariableCollector variableCollector = createVariableCollector();
     Sqrt func = new Sqrt(new Variable("z"));
     variableCollector.visit(func);
-    final List<String> result = variableCollector.getVariables().stream().toList();
+    final List<String> result = variableCollector.getVariables();
 
     assertThat(result, containsInAnyOrder("z"));
   }
@@ -79,7 +79,7 @@ public class ListVariablesTest {
     VariableCollector variableCollector = createVariableCollector();
     Subtract func = new Subtract(new Absolute(new Variable("value")), new Number(8d));
     variableCollector.visit(func);
-    final List<String> result = variableCollector.getVariables().stream().toList();
+    final List<String> result = variableCollector.getVariables();
 
     assertThat(result, containsInAnyOrder("value"));
   }
@@ -90,7 +90,7 @@ public class ListVariablesTest {
     VariableCollector variableCollector = createVariableCollector();
     Multiply func = new Multiply(new Subtract(new Number(5d), new Variable("i")), new Number(8d));
     variableCollector.visit(func);
-    final List<String> result = variableCollector.getVariables().stream().toList();
+    final List<String> result = variableCollector.getVariables();
 
     assertThat(result, containsInAnyOrder("i"));
   }
