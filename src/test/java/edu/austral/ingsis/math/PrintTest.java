@@ -3,15 +3,25 @@ package edu.austral.ingsis.math;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import edu.austral.ingsis.math.binaryfunctions.*;
+import edu.austral.ingsis.math.values.Number;
+import edu.austral.ingsis.math.visitors.Printer;
+import edu.austral.ingsis.math.visitors.Visitor;
 import org.junit.jupiter.api.Test;
 
 public class PrintTest {
 
+  private Printer createPrinter() {
+    return new Printer();
+  }
   /** Case 1 + 6 */
   @Test
   public void shouldPrintFunction1() {
-    final String expected = "1 + 6";
-    final String result = expected;
+    final String expected = "1.0 + 6.0";
+    final Printer printer = createPrinter();
+    final Sum func = new Sum(new Number(1d), new Number(6d));
+    printer.visit(func);
+    final String result = printer.getResult();
 
     assertThat(result, equalTo(expected));
   }

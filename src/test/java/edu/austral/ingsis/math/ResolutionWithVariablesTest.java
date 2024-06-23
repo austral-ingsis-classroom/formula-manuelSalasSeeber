@@ -2,15 +2,27 @@ package edu.austral.ingsis.math;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import edu.austral.ingsis.math.binaryfunctions.*;
+import edu.austral.ingsis.math.unaryfunctions.*;
+import edu.austral.ingsis.math.values.Variable;
+import edu.austral.ingsis.math.values.Number;
+
 
 import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
 
 public class ResolutionWithVariablesTest {
 
   /** Case 1 + x where x = 3 */
   @Test
   public void shouldResolveFunction1() {
-    final Double result = 4d;
+    final HashMap<String, Double> variables = new HashMap<>();
+    variables.put("x", 3d);
+    final Double result = new Sum(
+            new Number(1d),
+            new Variable("x"))
+            .evaluate(variables);
 
     assertThat(result, equalTo(4d));
   }

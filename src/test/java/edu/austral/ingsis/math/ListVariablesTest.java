@@ -6,14 +6,26 @@ import static org.hamcrest.Matchers.empty;
 
 import java.util.Collections;
 import java.util.List;
+
+import edu.austral.ingsis.math.binaryfunctions.*;
+import edu.austral.ingsis.math.values.Number;
+import edu.austral.ingsis.math.values.Variable;
+import edu.austral.ingsis.math.visitors.VariableCollector;
 import org.junit.jupiter.api.Test;
 
 public class ListVariablesTest {
 
+  private VariableCollector createVariableCollector() {
+    return new VariableCollector();
+  }
+
   /** Case 1 + 6 */
   @Test
   public void shouldListVariablesFunction1() {
-    final List<String> result = Collections.emptyList();
+    VariableCollector variableCollector = createVariableCollector();
+    Sum sum = new Sum(new Number(1d), new Number(6d));
+    variableCollector.visit(sum);
+    final List<String> result = variableCollector.getVariables().stream().toList();
 
     assertThat(result, empty());
   }
@@ -21,7 +33,10 @@ public class ListVariablesTest {
   /** Case 12 / div */
   @Test
   public void shouldListVariablesFunction2() {
-    final List<String> result = Collections.emptyList();
+    VariableCollector variableCollector = createVariableCollector();
+    Divide divide = new Divide(new Number(12d), new Variable("div"));
+    variableCollector.visit(divide);
+    final List<String> result = variableCollector.getVariables().stream().toList();
 
     assertThat(result, containsInAnyOrder("div"));
   }
