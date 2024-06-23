@@ -4,13 +4,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.empty;
 
-import java.util.List;
-
 import edu.austral.ingsis.math.binaryfunctions.*;
 import edu.austral.ingsis.math.unaryfunctions.*;
 import edu.austral.ingsis.math.values.Number;
 import edu.austral.ingsis.math.values.Variable;
 import edu.austral.ingsis.math.visitors.VariableCollector;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class ListVariablesTest {
